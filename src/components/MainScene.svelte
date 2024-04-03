@@ -1,12 +1,14 @@
 <script lang="ts">
-    import { T } from '@threlte/core'
-    import { Gizmo, OrbitControls } from '@threlte/extras'
+    import { T, useTask } from '@threlte/core'
+    import { Gizmo, OrbitControls, interactivity } from '@threlte/extras'
     import { BoxGeometry, MeshStandardMaterial } from 'three'
     import JustDonut from './JustDonut.svelte';
+    import { spring } from 'svelte/motion';
+    import { DEG2RAD } from 'three/src/math/MathUtils.js';
   
     export let autoRotate: boolean
     export let enableDamping: boolean
-    export let rotateSpeed: number
+    export let rotateSpeed: number = 0.5
     export let zoomToCursor: boolean
     export let zoomSpeed: number
     export let minPolarAngle: number
@@ -14,6 +16,13 @@
     export let enableZoom: boolean;
 
 
+
+    interactivity()
+    const scale = spring(1)
+    let rotation = 0
+    useTask((delta) => {
+      rotation += (delta * rotateSpeed)
+    })
     // npx @threlte/gltf@latest src/assets/Donut.glb --transform
   </script>
   
@@ -48,7 +57,19 @@
   
   <T.GridHelper args={[10, 10]} />
 
-  <JustDonut />
+  <T.Mesh 
+    position.y={1}
+
+    rotation.y={rotation}
+    rotation.z={60 * DEG2RAD}
+  >
+    <JustDonut> 
+      <T.MeshStandardMaterial color="hotpink"  slot="top" ></T.MeshStandardMaterial>
+      <T.MeshStandardMaterial color="brown" slot="base" ></T.MeshStandardMaterial>
+
+    </JustDonut>
+
+  </T.Mesh>
   
   <!-- <T.Mesh
     position.y={1}

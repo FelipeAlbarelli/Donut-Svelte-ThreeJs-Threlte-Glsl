@@ -19,7 +19,9 @@ Command: npx @threlte/gltf@2.0.3 /home/FelipeAlbarelli/Donut-Svelte-ThreeJs-Thre
   {#await gltf}
     <slot name="fallback" />
   {:then gltf}
-    <T.Mesh geometry={gltf.nodes.Torus001.geometry} material={gltf.materials['Material.002']} position={[0, 0.36, 0]} />
+    <T.Mesh geometry={gltf.nodes.Torus001.geometry} material={gltf.materials['Material.002']} position={[0, 0.36, 0]} > 
+      
+    </T.Mesh>
     <T.Mesh geometry={gltf.nodes.Torus.geometry} material={gltf.materials['Material.001']} position={[0, 0.36, 0]} />
     <T.Mesh geometry={gltf.nodes.Torus001_1.geometry} material={gltf.materials['Material.002']} position={[0, 0.36, 0]}>
       <T.Mesh
