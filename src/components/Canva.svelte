@@ -1,8 +1,7 @@
 <script lang="ts">
   import { Canvas } from '@threlte/core'
-    import MyCanva from './components/Canva.svelte';
-    import Controler from './components/Controler.svelte';
-
+    import MainScene from './MainScene.svelte';
+    import Controler from './Controler.svelte';
   let autoRotate: boolean = false
   let enableDamping: boolean = true
   let rotateSpeed: number = 1
@@ -13,24 +12,21 @@
   let enableZoom: boolean = true
 
 
-  
 </script>
-<div class="canva-cont">
-  <MyCanva>
-  </MyCanva>
-</div>
 
+  <Canvas>
+    <MainScene
+      {enableDamping}
+      {autoRotate}
+      {rotateSpeed}
+      {zoomToCursor}
+      {zoomSpeed}
+      {minPolarAngle}
+      {maxPolarAngle}
+      {enableZoom}
+    />
+    </Canvas>
 
-  <Controler
-    bind:enableDamping
-    bind:autoRotate
-    bind:rotateSpeed
-    bind:zoomToCursor
-    bind:zoomSpeed
-    bind:minPolarAngle
-    bind:maxPolarAngle
-    bind:enableZoom
-  />
 <style>
   div {
     position: relative;
