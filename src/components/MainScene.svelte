@@ -1,8 +1,8 @@
 <script lang="ts">
     import { T } from '@threlte/core'
     import { Gizmo, OrbitControls } from '@threlte/extras'
-    import Donut from './Donut.svelte'
     import { BoxGeometry, MeshStandardMaterial } from 'three'
+    import JustDonut from './JustDonut.svelte';
   
     export let autoRotate: boolean
     export let enableDamping: boolean
@@ -48,7 +48,7 @@
   
   <T.GridHelper args={[10, 10]} />
 
-  <Donut />
+  <JustDonut />
   
   <!-- <T.Mesh
     position.y={1}
