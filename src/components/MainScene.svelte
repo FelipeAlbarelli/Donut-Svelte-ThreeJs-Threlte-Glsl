@@ -1,8 +1,8 @@
 <script lang="ts">
     import { T } from '@threlte/core'
     import { Gizmo, OrbitControls } from '@threlte/extras'
-  
     import { BoxGeometry, MeshStandardMaterial } from 'three'
+    import JustDonut from './JustDonut.svelte';
   
     export let autoRotate: boolean
     export let enableDamping: boolean
@@ -11,7 +11,10 @@
     export let zoomSpeed: number
     export let minPolarAngle: number
     export let maxPolarAngle: number
-    export let enableZoom: boolean
+    export let enableZoom: boolean;
+
+
+    // npx @threlte/gltf@latest src/assets/Donut.glb --transform
   </script>
   
   <T.PerspectiveCamera
@@ -44,10 +47,12 @@
   <T.AmbientLight intensity={0.3} />
   
   <T.GridHelper args={[10, 10]} />
+
+  <JustDonut />
   
-  <T.Mesh
+  <!-- <T.Mesh
     position.y={1}
     geometry={new BoxGeometry(2, 2, 2)}
     material={new MeshStandardMaterial()}
   />
-  
+   -->
