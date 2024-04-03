@@ -27,12 +27,12 @@ Command: npx @threlte/gltf@2.0.3 /home/FelipeAlbarelli/Donut-Svelte-ThreeJs-Thre
 
     <T.Mesh 
       geometry={gltf.nodes.Torus001.geometry} 
-      material={ mat2 ?? gltf.materials['Material.002']} 
-      position={[0, 0.36, 0]} > 
+      material={ mat1 ?? gltf.materials['Material.002']} 
+      position={[0, 0, 0]} > 
     </T.Mesh>
-    <T.Mesh geometry={gltf.nodes.Torus.geometry} material={mat1 ?? gltf.materials['Material.001']} position={[0, 0.36, 0]} />
+    <T.Mesh geometry={gltf.nodes.Torus.geometry} material={mat2 ?? gltf.materials['Material.001']} position={[0, 0., 0]} />
 
-    <T.Mesh geometry={gltf.nodes.Torus_1.geometry} material={mat1 ?? gltf.materials['Material.001']} position={[0, 0.36, 0]} />
+    <!-- <T.Mesh geometry={gltf.nodes.Torus_1.geometry} material={mat2 ?? gltf.materials['Material.001']} position={[0, 0, 0]} /> -->
   {:catch error}
     <slot name="error" {error} />
   {/await}

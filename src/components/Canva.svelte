@@ -18,7 +18,7 @@
     <MainScene
       {enableDamping}
       {autoRotate}
-      {rotateSpeed}
+      rotSpeedY={rotateSpeed}
       {zoomToCursor}
       {zoomSpeed}
       {minPolarAngle}
