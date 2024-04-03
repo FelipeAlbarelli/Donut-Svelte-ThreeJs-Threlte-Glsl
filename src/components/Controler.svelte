@@ -15,3 +15,11 @@
 <div class="container">
     controler
 </div>
+
+<style>
+
+    .container {
+        background-color: white;
+    }
+
+</style>
