@@ -63,10 +63,10 @@
     rotation.y={rotation}
     rotation.z={60 * DEG2RAD}
   >
-    <JustDonut> 
-      <T.MeshStandardMaterial color="hotpink"  slot="top" ></T.MeshStandardMaterial>
-      <T.MeshStandardMaterial color="brown" slot="base" ></T.MeshStandardMaterial>
-
+    <JustDonut
+      mat1={new MeshStandardMaterial({color: 'blue'})}
+      mat2={new MeshStandardMaterial({color: 'red'})}
+    > 
     </JustDonut>
 
   </T.Mesh>
