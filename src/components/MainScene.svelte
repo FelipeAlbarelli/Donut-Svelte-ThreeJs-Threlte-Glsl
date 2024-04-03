@@ -1,27 +1,36 @@
 <script lang="ts">
     import { T, useTask } from '@threlte/core'
     import { Gizmo, OrbitControls, interactivity } from '@threlte/extras'
-    import { BoxGeometry, MeshStandardMaterial } from 'three'
+    import { BoxGeometry, Mesh, MeshStandardMaterial } from 'three'
     import JustDonut from './JustDonut.svelte';
     import { spring } from 'svelte/motion';
     import { DEG2RAD } from 'three/src/math/MathUtils.js';
   
     export let autoRotate: boolean
     export let enableDamping: boolean
-    export let rotateSpeed: number = 0.5
+    export let rotSpeedY: number = 0.05
+    export let rotSpeedX: number = 0.25
     export let zoomToCursor: boolean
     export let zoomSpeed: number
     export let minPolarAngle: number
     export let maxPolarAngle: number
     export let enableZoom: boolean;
+  let cursorOn = false;
 
+    const defaultPalletHx = [
+      'A34343', 'E9C874' , 'FBF8DD' , 'C0D6E8'
+    ]
 
+    const colors = defaultPalletHx.map( i => "#" + i)
 
     interactivity()
     const scale = spring(1)
-    let rotation = 0
+    let rotY = 0;
+    let rotX = 0;
     useTask((delta) => {
-      rotation += (delta * rotateSpeed)
+      // if (!cursorOn) return;
+      rotY += (delta * rotSpeedY);
+      rotX += (delta * rotSpeedX);
     })
     // npx @threlte/gltf@latest src/assets/Donut.glb --transform
   </script>
@@ -34,7 +43,6 @@
     <OrbitControls
       {enableDamping}
       {autoRotate}
-      {rotateSpeed}
       {zoomToCursor}
       {zoomSpeed}
       {minPolarAngle}
@@ -58,17 +66,26 @@
   <T.GridHelper args={[10, 10]} />
 
   <T.Mesh 
-    position.y={1}
-
-    rotation.y={rotation}
-    rotation.z={60 * DEG2RAD}
+   rotation.y={rotY *0.2}
+   on:pointerenter={(e) => {cursorOn = true ; console.log(rotSpeedX)}}
+   on:pointerleave={(e) => {cursorOn = false ; console.log(rotSpeedY)}}
   >
-    <JustDonut> 
-      <T.MeshStandardMaterial color="hotpink"  slot="top" ></T.MeshStandardMaterial>
-      <T.MeshStandardMaterial color="brown" slot="base" ></T.MeshStandardMaterial>
 
-    </JustDonut>
+    <T.Mesh 
+      position.y={1}
+      rotation.z={45 * DEG2RAD}
+      >
+      <T.Mesh      
+      rotation.y={rotX}
+      position.y={-.5}
 
+      > 
+        <JustDonut
+          mat1={new MeshStandardMaterial({color: colors[3]})}
+          mat2={new MeshStandardMaterial({color: colors[2] })}
+        > </JustDonut>
+      </T.Mesh>
+    </T.Mesh>
   </T.Mesh>
   
   <!-- <T.Mesh
