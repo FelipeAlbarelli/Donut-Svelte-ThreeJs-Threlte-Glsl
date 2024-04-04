@@ -8,13 +8,13 @@ Command: npx @threlte/gltf@2.0.3 /home/FelipeAlbarelli/Donut-Svelte-ThreeJs-Thre
 
   import { Group } from 'three'
   import { T, forwardEventHandlers } from '@threlte/core'
-  import { useGltf } from '@threlte/extras'
+  import { FakeGlowMaterial, useGltf } from '@threlte/extras'
 
   export const ref = new Group()
 
   const gltf = useGltf('/assets/JustDonut.gltf')
 
-
+  export let glowTop = true , glowBot = false;
   const component = forwardEventHandlers()
 </script>
 
@@ -23,13 +23,19 @@ Command: npx @threlte/gltf@2.0.3 /home/FelipeAlbarelli/Donut-Svelte-ThreeJs-Thre
     <slot name="fallback" />
   {:then gltf}
 
-    <T.Mesh 
-      geometry={gltf.nodes.Torus001.geometry} 
-      position={[0, 0, 0]} >
-      <slot name="top" />
+    <T.Mesh
+
+    >
+      <T.Mesh 
+        geometry={gltf.nodes.Torus001.geometry} 
+        position={[0, 0, 0]} 
+      >
+
+        <slot name="mat-top" />
+      </T.Mesh>
     </T.Mesh>
     <T.Mesh geometry={gltf.nodes.Torus.geometry} position={[0, 0., 0]} >
-      <slot name="bot" />
+      <slot name="mat-bot" />
     
     </T.Mesh>
 

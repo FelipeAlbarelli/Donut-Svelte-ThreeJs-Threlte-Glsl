@@ -40,7 +40,7 @@
                 💡 luminosidade : <input  bind:value={$lighnessStore}  type="range" min="0"  max="1" step="0.02" />
             </div>
             <div class="field">
-                🌟 + ☢️ glow : <input  type="checkbox" bind:checked={$glow1} />  <input  type="checkbox" bind:checked={$glow2} />
+                🌟outline : <input  type="checkbox" bind:checked={$glow1} />  <input  type="checkbox" bind:checked={$glow2} />
             </div>
             <div class="field">
                 cores  : 

@@ -1,12 +1,13 @@
 <script lang="ts">
     import { T, useTask } from '@threlte/core'
-    import { Gizmo, OrbitControls, interactivity , FakeGlowMaterial } from '@threlte/extras'
+    import { Gizmo, OrbitControls, interactivity , FakeGlowMaterial, Outlines } from '@threlte/extras'
     import { BoxGeometry, Mesh, MeshStandardMaterial } from 'three'
     import JustDonut from './JustDonut.svelte';
     import { spring } from 'svelte/motion';
     import { DEG2RAD } from 'three/src/math/MathUtils.js';
-    import { controlerStore, lighnessStore, rotationSpeed } from './controler.store';
+    import { controlerStore, glow1, glow2 , lighnessStore, rotationSpeed } from './controler.store';
     import { color } from 'three/examples/jsm/nodes/Nodes.js';
+    import { OutlineEffect } from 'three/examples/jsm/Addons.js';
   
     export let autoRotate: boolean
     export let enableDamping: boolean
@@ -27,7 +28,9 @@
       }
     }
 
+    $: glows = [$glow1 , $glow2]
 
+    $: console.log(glows)
 
     interactivity()
     const scale = spring(1)
@@ -88,19 +91,30 @@
 
       > 
         <JustDonut
+          glowTop={$glow1}
         > 
-          <T.MeshStandardMaterial
-            slot="top"
-            color={$controlerStore.color1}
-          />
-          <T.MeshStandardMaterial
-            slot="bot"
-            color={$controlerStore.color2}
-          />
+          <svelte:fragment slot="mat-top" >
+            <T.MeshToonMaterial
+              color={$controlerStore.color1}
+            />
+            {#if $glow1}
+            <Outlines 
+              color={$controlerStore.color1}
+            />
+            {/if}
+          </svelte:fragment>
+          <svelte:fragment slot="mat-bot" >
+            <T.MeshToonMaterial
+              color={$controlerStore.color2}
+            />
+            {#if $glow2}
+            <Outlines 
+              color={$controlerStore.color2}
+            />
+            {/if}
 
+          </svelte:fragment>
 
-          <!-- <FakeGlowMaterial name="top" />
-          <FakeGlowMaterial name="bot" /> -->
         </JustDonut>
       </T.Mesh>
     </T.Mesh>
