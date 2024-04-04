@@ -3,34 +3,46 @@
     import { fragShader , vertexShader } from "./controler.store";
     import { onMount } from "svelte";
     import { T, useTask } from '@threlte/core'
-    import type { ShaderMaterial } from "three";
+    import { Material, Mesh, ShaderMaterial } from "three";
+    import { interactivity } from "@threlte/extras";
     const pulseTimer = tweened(0)
+    interactivity()
 
 
     let shader : ShaderMaterial;
 
 
-    let fragShaderText = $fragShader
+    $: shaders = {frag: $fragShader , vertex: $vertexShader}
 
-    fragShader.subscribe( newValue => {
-        if (!shader) return;
-        // shader.needsUpdate= true;
-        console.log('update')
-    })
+    $: {
+       if (shader && $fragShader && $vertexShader ) {
+            shader.setValues({
+                fragmentShader: $fragShader,
+                vertexShader: $vertexShader,
+            })
+
+            shader.needsUpdate= true;
+       }
+    }
 
     onMount( () => {
       pulseTimer.set(60 * 60 * 2 , {duration: 60 * 60 * 2})
       console.log({frag: $fragShader , ver: $vertexShader})
     })
-    
+    let click = false;
 </script>
 
+<svelte:body 
+    on:click={() => {click = !click; shader.setValues({fragmentShader: $fragShader}) ; shader.needsUpdate = true; }}
+/>
+
+<!-- <T.Mesh 
+    bind:ref={thisMesh}
+    material={material}
+/> -->
+
 <T.ShaderMaterial
-    on:onMount={ ref => {
-        shader = ref;
-    }}
-    fragShader={$fragShader}
-    vertexShader={$vertexShader}
+    bind:ref={shader}
     wireframe={false}
     uniforms={{
         pulseTimer: {
