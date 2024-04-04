@@ -4,6 +4,9 @@
   uniform vec2 u_resolution;
   uniform vec2 u_mouse;
   uniform float pulseTimer;
+
+  uniform vec3 colorA;
+  uniform vec3 colorB;
   
   varying vec2 vUv;
   
@@ -13,11 +16,9 @@
 
     float sinedTime = sin(pulseTimer);
 
-      gl_FragColor=vec4(
-          sinedTime,
-          sinedTime,
-          0.5,
-      1.);
+
+    gl_FragColor = vec4(mix(colorA, colorB,sinedTime ), 1.0);
+
   }
   
   

@@ -1,6 +1,8 @@
 varying vec2 vUv;
 varying vec3 vPosition;
 
+  uniform vec3 colorA;
+  uniform vec3 colorB;
 void main() {
   vec4 modelPosition = modelMatrix * vec4(position, 1.0);
 

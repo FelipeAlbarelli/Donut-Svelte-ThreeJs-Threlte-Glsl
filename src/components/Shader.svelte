@@ -1,12 +1,16 @@
 <script lang="ts">
     import { tweened } from "svelte/motion";
-    import { fragShader , vertexShader } from "./controler.store";
+    import { fragShader , vertexShader , controlerStore, colorsState } from "./controler.store";
     import { onMount } from "svelte";
     import { T, useTask } from '@threlte/core'
-    import { Material, Mesh, ShaderMaterial } from "three";
+    import { Color, Material, Mesh, ShaderMaterial, Uniform, Vector3 } from "three";
     import { interactivity } from "@threlte/extras";
+    import { color } from "three/examples/jsm/nodes/Nodes.js";
 
     interactivity()
+
+    const colorA = new Uniform($colorsState.colorA)
+    const colorB = new Uniform($colorsState.colorB)
 
 
     export let timerSpeed = 1;
@@ -24,7 +28,7 @@
     $: shaders = {frag: $fragShader , vertex: $vertexShader}
 
     $: {
-       if (shader && $fragShader && $vertexShader ) {
+       if (shader && ($fragShader || $vertexShader) ) {
             shader.setValues({
                 fragmentShader: $fragShader,
                 vertexShader: $vertexShader,
@@ -34,12 +38,34 @@
        }
     }
 
+    colorsState.subscribe( state => {
+       console.log( colorA )
+    })
+
+    useTask( delta => {
+        if (!shader) return;
+
+
+    })
+
+
+
+    onMount( () => {
+        // shader.uniforms.colorA = colorA
+    })
+
 
     let click = false;
+
+    const handleClick = () => {
+        console.log($colorsState)
+    }
+
+
 </script>
 
 <svelte:body 
-    on:click={() => {click = !click; shader.setValues({fragmentShader: $fragShader}) ; shader.needsUpdate = true; }}
+    on:click={() => {click = !click;  handleClick()}}
 />
 
 <!-- <T.Mesh 
@@ -53,7 +79,14 @@
     uniforms={{
         pulseTimer: {
             value: 0
-        }
+        },
+        colorA : colorA,
+        colorB : colorB
     }}
+
     uniforms.pulseTimer.value={$pulseTimer}
-/>
+    uniforms.colorA.value={$colorsState.colorA}
+    uniforms.colorB.value={$colorsState.colorB}
+>
+
+</T.ShaderMaterial>

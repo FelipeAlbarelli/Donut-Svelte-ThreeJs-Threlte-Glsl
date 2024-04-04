@@ -5,7 +5,7 @@
     import JustDonut from './JustDonut.svelte';
     import { spring, tweened } from 'svelte/motion';
     import { DEG2RAD } from 'three/src/math/MathUtils.js';
-    import { controlerStore, fragShader, glow1, glow2 , lighnessStore, rotationSpeed } from './controler.store';
+    import { colorsState, controlerStore, fragShader, glow1, glow2 , lighnessStore, rotationSpeed } from './controler.store';
     import { color } from 'three/examples/jsm/nodes/Nodes.js';
     import { OutlineEffect } from 'three/examples/jsm/Addons.js';
     import { onMount } from 'svelte';
@@ -104,7 +104,7 @@
 
             {#if $glow1}
             <Outlines 
-              color={$controlerStore.color1}
+              color={$colorsState.colorA}
             />
             {/if}
           </svelte:fragment>
@@ -117,7 +117,7 @@
             /> -->
             {#if $glow2}
             <Outlines 
-              color={$controlerStore.color2}
+            color={$colorsState.colorB}
             />
             {/if}
 

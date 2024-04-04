@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { controlerStore, fragShader, glow1 , glow2, lighnessStore, rotationSpeed, setState } from "./controler.store";
+    import { colorsState, controlerStore, fragShader, glow1 , glow2, lighnessStore, rotationSpeed, setState } from "./controler.store";
     import Toggle from "./ui/Toggle.svelte";
     import ColorPicker from 'svelte-awesome-color-picker';
 
@@ -46,13 +46,13 @@
                 cores  : 
                 <ColorPicker
                     label=""
-                    on:input={ e => { setState({color1: e.detail.hex}) }}
-                    hex={$controlerStore.color1 }
+                    on:input={ e => { setState({color1: e.detail.rgb }) }}
+                    rgb={$controlerStore.color1 }
                 />
                 <ColorPicker
                     label=""
-                    on:input={ e => { setState({color2: e.detail.hex}) }}
-                    hex={$controlerStore.color2 }
+                    on:input={ e => { setState({color2: e.detail.rgb}) }}
+                    rgb={$controlerStore.color2 }
                 />
             </div>
             <div class="field text-area">
