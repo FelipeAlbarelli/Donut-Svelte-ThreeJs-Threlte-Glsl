@@ -1,0 +1,9 @@
+#Melhorias:
+
+implementar buble dos valores de range seria top
+    https://css-tricks.com/value-bubbles-for-range-inputs/
+
+
+
+#performance:
+atualmente a cada mudança de cor, e criado uma nova textura

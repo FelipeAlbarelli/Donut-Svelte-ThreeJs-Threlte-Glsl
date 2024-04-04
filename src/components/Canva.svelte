@@ -4,7 +4,7 @@
     import Controler from './Controler.svelte';
   let autoRotate: boolean = false
   let enableDamping: boolean = true
-  let rotateSpeed: number = 1
+
   let zoomToCursor: boolean = false
   let zoomSpeed: number = 1
   let minPolarAngle: number = 0
@@ -18,7 +18,6 @@
     <MainScene
       {enableDamping}
       {autoRotate}
-      rotSpeedY={rotateSpeed}
       {zoomToCursor}
       {zoomSpeed}
       {minPolarAngle}

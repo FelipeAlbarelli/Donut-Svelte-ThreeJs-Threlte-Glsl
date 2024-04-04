@@ -5,23 +5,20 @@
     import JustDonut from './JustDonut.svelte';
     import { spring } from 'svelte/motion';
     import { DEG2RAD } from 'three/src/math/MathUtils.js';
+    import { controlerStore, lighnessStore, rotationSpeed } from './controler.store';
   
     export let autoRotate: boolean
     export let enableDamping: boolean
-    export let rotSpeedY: number = 0.05
     export let rotSpeedX: number = 0.25
     export let zoomToCursor: boolean
     export let zoomSpeed: number
     export let minPolarAngle: number
     export let maxPolarAngle: number
     export let enableZoom: boolean;
-  let cursorOn = false;
+    let cursorOn = false;
 
-    const defaultPalletHx = [
-      'A34343', 'E9C874' , 'FBF8DD' , 'C0D6E8'
-    ]
 
-    const colors = defaultPalletHx.map( i => "#" + i)
+
 
     interactivity()
     const scale = spring(1)
@@ -29,7 +26,7 @@
     let rotX = 0;
     useTask((delta) => {
       // if (!cursorOn) return;
-      rotY += (delta * rotSpeedY);
+      rotY += (delta * $rotationSpeed);
       rotX += (delta * rotSpeedX);
     })
     // npx @threlte/gltf@latest src/assets/Donut.glb --transform
@@ -61,14 +58,15 @@
     position.y={10}
     position.z={10}
   />
-  <T.AmbientLight intensity={0.3} />
+  <T.AmbientLight intensity={$lighnessStore} />
   
   <T.GridHelper args={[10, 10]} />
 
   <T.Mesh 
    rotation.y={rotY *0.2}
-   on:pointerenter={(e) => {cursorOn = true ; console.log(rotSpeedX)}}
-   on:pointerleave={(e) => {cursorOn = false ; console.log(rotSpeedY)}}
+   on:pointerenter={(e) => {cursorOn = true ;}}
+   on:pointerleave={(e) => {cursorOn = false ; }}
+   scale={ cursorOn ? 1.2 : 1 }
   >
 
     <T.Mesh 
@@ -81,8 +79,8 @@
 
       > 
         <JustDonut
-          mat1={new MeshStandardMaterial({color: colors[3]})}
-          mat2={new MeshStandardMaterial({color: colors[2] })}
+          mat1={new MeshStandardMaterial({color: $controlerStore.color1})}
+          mat2={new MeshStandardMaterial({color: $controlerStore.color2 })}
         > </JustDonut>
       </T.Mesh>
     </T.Mesh>

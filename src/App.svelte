@@ -2,6 +2,7 @@
   import { Canvas } from '@threlte/core'
     import MyCanva from './components/Canva.svelte';
     import Controler from './components/Controler.svelte';
+    import { defaultPalletHx } from './constants';
 
   let autoRotate: boolean = false
   let enableDamping: boolean = true
@@ -12,26 +13,34 @@
   let maxPolarAngle: number = Math.PI
   let enableZoom: boolean = true
 
-
+  let color1 = defaultPalletHx[3];
+  let color2 = defaultPalletHx[2];
   
 </script>
 <div class="canva-cont">
-  <MyCanva>
+  <MyCanva
+  >
   </MyCanva>
 </div>
 
+  <div class="controler">
+    <Controler
 
-  <Controler
-    bind:enableDamping
-    bind:autoRotate
-    bind:rotateSpeed
-    bind:zoomToCursor
-    bind:zoomSpeed
-    bind:minPolarAngle
-    bind:maxPolarAngle
-    bind:enableZoom
-  />
+      bind:enableDamping
+      bind:autoRotate
+      bind:rotateSpeed
+      bind:zoomToCursor
+      bind:zoomSpeed
+      bind:minPolarAngle
+      bind:maxPolarAngle
+      bind:enableZoom
+    />
+  </div>
 <style>
+  .controler {
+    position: absolute;
+  }
+
   .canva-cont {
     position: absolute;
     top: 0;
