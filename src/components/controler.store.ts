@@ -1,4 +1,5 @@
 import { writable } from "svelte/store";
+import { defaultPalletHx } from "../constants";
 
 
 export type ControlerState = {
@@ -12,8 +13,8 @@ export const  rotationSpeed = writable(0.5)
 
 
 export const controlerStore = writable<ControlerState>({
-    color1: '#605530',
-    color2: '#FBF8DD',
+    color1: defaultPalletHx[1],
+    color2: defaultPalletHx[3],
 });
 
 

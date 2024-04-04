@@ -18,6 +18,14 @@
     let cursorOn = false;
 
 
+    $: {
+      if (cursorOn) {
+        scale.set(1.3 , {soft: true})
+      } else {
+        scale.set(1 )
+      }
+    }
+
 
 
     interactivity()
@@ -66,7 +74,6 @@
    rotation.y={rotY *0.2}
    on:pointerenter={(e) => {cursorOn = true ;}}
    on:pointerleave={(e) => {cursorOn = false ; }}
-   scale={ cursorOn ? 1.2 : 1 }
   >
 
     <T.Mesh 
@@ -75,7 +82,8 @@
       >
       <T.Mesh      
       rotation.y={rotX}
-      position.y={-.5}
+      position.y={0}
+      scale={$scale * 1.5}
 
       > 
         <JustDonut

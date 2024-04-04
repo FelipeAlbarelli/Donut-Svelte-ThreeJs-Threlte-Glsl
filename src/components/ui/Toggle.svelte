@@ -3,7 +3,7 @@
 
     export let show = false;
 
-    $: label = show ? statesLebels[1] : statesLebels[0];
+    $: label = show ? statesLebels[0] : statesLebels[1];
 
     const toggleState = () => {
         show = !show;
