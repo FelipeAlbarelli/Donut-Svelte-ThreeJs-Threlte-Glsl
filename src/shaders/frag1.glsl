@@ -9,10 +9,13 @@
   
   varying vec3 vPosition;  
   void main(){
+    float sumVuv = vUv.x + vUv.y;
+
+    float sinedTime = sin(pulseTimer);
 
       gl_FragColor=vec4(
-          0.5,
-          0.5,
+          sinedTime,
+          sinedTime,
           0.5,
       1.);
   }

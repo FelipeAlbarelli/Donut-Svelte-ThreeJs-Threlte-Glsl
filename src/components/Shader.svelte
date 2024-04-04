@@ -5,9 +5,18 @@
     import { T, useTask } from '@threlte/core'
     import { Material, Mesh, ShaderMaterial } from "three";
     import { interactivity } from "@threlte/extras";
-    const pulseTimer = tweened(0)
+
     interactivity()
 
+
+    export let timerSpeed = 1;
+
+    
+    const pulseTimer = tweened(0.1 )
+
+    pulseTimer.set( 100 , {
+        duration : 100_000 / timerSpeed
+    });
 
     let shader : ShaderMaterial;
 
@@ -25,10 +34,7 @@
        }
     }
 
-    onMount( () => {
-      pulseTimer.set(60 * 60 * 2 , {duration: 60 * 60 * 2})
-      console.log({frag: $fragShader , ver: $vertexShader})
-    })
+
     let click = false;
 </script>
 

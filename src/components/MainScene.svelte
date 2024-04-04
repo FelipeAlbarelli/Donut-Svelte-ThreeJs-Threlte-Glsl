@@ -97,7 +97,7 @@
         <JustDonut
         > 
           <svelte:fragment slot="mat-top" >
-            <Shader />
+            <Shader  timerSpeed={1} />
             <!-- <T.MeshToonMaterial
               color={$controlerStore.color1}
             /> -->
@@ -110,7 +110,7 @@
           </svelte:fragment>
           <svelte:fragment slot="mat-bot" >
 
-          <Shader />
+          <Shader timerSpeed={2} />
 
           <!-- <T.MeshToonMaterial
               color={$controlerStore.color2}
