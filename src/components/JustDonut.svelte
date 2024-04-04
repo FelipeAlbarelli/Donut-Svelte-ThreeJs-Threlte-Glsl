@@ -14,8 +14,6 @@ Command: npx @threlte/gltf@2.0.3 /home/FelipeAlbarelli/Donut-Svelte-ThreeJs-Thre
 
   const gltf = useGltf('/assets/JustDonut.gltf')
 
-  export let mat1  ;
-  export let mat2  ;
 
   const component = forwardEventHandlers()
 </script>
@@ -27,10 +25,13 @@ Command: npx @threlte/gltf@2.0.3 /home/FelipeAlbarelli/Donut-Svelte-ThreeJs-Thre
 
     <T.Mesh 
       geometry={gltf.nodes.Torus001.geometry} 
-      material={ mat1 ?? gltf.materials['Material.002']} 
-      position={[0, 0, 0]} > 
+      position={[0, 0, 0]} >
+      <slot name="top" />
     </T.Mesh>
-    <T.Mesh geometry={gltf.nodes.Torus.geometry} material={mat2 ?? gltf.materials['Material.001']} position={[0, 0., 0]} />
+    <T.Mesh geometry={gltf.nodes.Torus.geometry} position={[0, 0., 0]} >
+      <slot name="bot" />
+    
+    </T.Mesh>
 
     <!-- <T.Mesh geometry={gltf.nodes.Torus_1.geometry} material={mat2 ?? gltf.materials['Material.001']} position={[0, 0, 0]} /> -->
   {:catch error}

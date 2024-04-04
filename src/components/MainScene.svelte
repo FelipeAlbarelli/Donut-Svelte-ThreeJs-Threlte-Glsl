@@ -1,11 +1,12 @@
 <script lang="ts">
     import { T, useTask } from '@threlte/core'
-    import { Gizmo, OrbitControls, interactivity } from '@threlte/extras'
+    import { Gizmo, OrbitControls, interactivity , FakeGlowMaterial } from '@threlte/extras'
     import { BoxGeometry, Mesh, MeshStandardMaterial } from 'three'
     import JustDonut from './JustDonut.svelte';
     import { spring } from 'svelte/motion';
     import { DEG2RAD } from 'three/src/math/MathUtils.js';
     import { controlerStore, lighnessStore, rotationSpeed } from './controler.store';
+    import { color } from 'three/examples/jsm/nodes/Nodes.js';
   
     export let autoRotate: boolean
     export let enableDamping: boolean
@@ -87,9 +88,20 @@
 
       > 
         <JustDonut
-          mat1={new MeshStandardMaterial({color: $controlerStore.color1})}
-          mat2={new MeshStandardMaterial({color: $controlerStore.color2 })}
-        > </JustDonut>
+        > 
+          <T.MeshStandardMaterial
+            slot="top"
+            color={$controlerStore.color1}
+          />
+          <T.MeshStandardMaterial
+            slot="bot"
+            color={$controlerStore.color2}
+          />
+
+
+          <!-- <FakeGlowMaterial name="top" />
+          <FakeGlowMaterial name="bot" /> -->
+        </JustDonut>
       </T.Mesh>
     </T.Mesh>
   </T.Mesh>

@@ -5,16 +5,21 @@ import { defaultPalletHx } from "../constants";
 export type ControlerState = {
     color1 : string;
     color2 : string;
+
 }
 
 export const lighnessStore = writable( 0.3)
 
 export const  rotationSpeed = writable(0.5)
 
+export const  glow1 = writable(true)
+export const  glow2 = writable(false)
+
 
 export const controlerStore = writable<ControlerState>({
     color1: defaultPalletHx[1],
     color2: defaultPalletHx[3],
+
 });
 
 

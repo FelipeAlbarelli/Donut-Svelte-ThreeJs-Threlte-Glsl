@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { controlerStore, lighnessStore, rotationSpeed, setState } from "./controler.store";
+    import { controlerStore, glow1 , glow2, lighnessStore, rotationSpeed, setState } from "./controler.store";
     import Toggle from "./ui/Toggle.svelte";
     import ColorPicker from 'svelte-awesome-color-picker';
 
@@ -37,7 +37,10 @@
                     type="range"  />
             </div>
             <div class="field">
-                luminosidade : <input  bind:value={$lighnessStore}  type="range" min="0"  max="1" step="0.02" />
+                💡 luminosidade : <input  bind:value={$lighnessStore}  type="range" min="0"  max="1" step="0.02" />
+            </div>
+            <div class="field">
+                🌟 + ☢️ glow : <input  type="checkbox" bind:checked={$glow1} />  <input  type="checkbox" bind:checked={$glow2} />
             </div>
             <div class="field">
                 cores  : 
