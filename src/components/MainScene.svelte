@@ -3,11 +3,13 @@
     import { Gizmo, OrbitControls, interactivity , FakeGlowMaterial, Outlines } from '@threlte/extras'
     import { BoxGeometry, Mesh, MeshStandardMaterial } from 'three'
     import JustDonut from './JustDonut.svelte';
-    import { spring } from 'svelte/motion';
+    import { spring, tweened } from 'svelte/motion';
     import { DEG2RAD } from 'three/src/math/MathUtils.js';
-    import { controlerStore, glow1, glow2 , lighnessStore, rotationSpeed } from './controler.store';
+    import { controlerStore, fragShader, glow1, glow2 , lighnessStore, rotationSpeed } from './controler.store';
     import { color } from 'three/examples/jsm/nodes/Nodes.js';
     import { OutlineEffect } from 'three/examples/jsm/Addons.js';
+    import { onMount } from 'svelte';
+    import Shader from './Shader.svelte';
   
     export let autoRotate: boolean
     export let enableDamping: boolean
@@ -30,10 +32,12 @@
 
     $: glows = [$glow1 , $glow2]
 
-    $: console.log(glows)
 
     interactivity()
     const scale = spring(1)
+
+
+
     let rotY = 0;
     let rotX = 0;
     useTask((delta) => {
@@ -91,12 +95,13 @@
 
       > 
         <JustDonut
-          glowTop={$glow1}
         > 
           <svelte:fragment slot="mat-top" >
-            <T.MeshToonMaterial
+            <Shader />
+            <!-- <T.MeshToonMaterial
               color={$controlerStore.color1}
-            />
+            /> -->
+
             {#if $glow1}
             <Outlines 
               color={$controlerStore.color1}
@@ -104,9 +109,12 @@
             {/if}
           </svelte:fragment>
           <svelte:fragment slot="mat-bot" >
-            <T.MeshToonMaterial
+
+          <Shader />
+
+          <!-- <T.MeshToonMaterial
               color={$controlerStore.color2}
-            />
+            /> -->
             {#if $glow2}
             <Outlines 
               color={$controlerStore.color2}

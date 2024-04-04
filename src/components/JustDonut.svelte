@@ -14,7 +14,6 @@ Command: npx @threlte/gltf@2.0.3 /home/FelipeAlbarelli/Donut-Svelte-ThreeJs-Thre
 
   const gltf = useGltf('/assets/JustDonut.gltf')
 
-  export let glowTop = true , glowBot = false;
   const component = forwardEventHandlers()
 </script>
 

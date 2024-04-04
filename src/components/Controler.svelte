@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { controlerStore, glow1 , glow2, lighnessStore, rotationSpeed, setState } from "./controler.store";
+    import { controlerStore, fragShader, glow1 , glow2, lighnessStore, rotationSpeed, setState } from "./controler.store";
     import Toggle from "./ui/Toggle.svelte";
     import ColorPicker from 'svelte-awesome-color-picker';
 
@@ -44,17 +44,21 @@
             </div>
             <div class="field">
                 cores  : 
-            <ColorPicker
-                label=""
-                on:input={ e => { setState({color1: e.detail.hex}) }}
-                hex={$controlerStore.color1 }
-            />
-            <ColorPicker
-                label=""
-                on:input={ e => { setState({color2: e.detail.hex}) }}
-                hex={$controlerStore.color2 }
-            />
+                <ColorPicker
+                    label=""
+                    on:input={ e => { setState({color1: e.detail.hex}) }}
+                    hex={$controlerStore.color1 }
+                />
+                <ColorPicker
+                    label=""
+                    on:input={ e => { setState({color2: e.detail.hex}) }}
+                    hex={$controlerStore.color2 }
+                />
             </div>
+            <div class="field text-area">
+                <textarea  bind:value={$fragShader} />
+            </div>
+            
             
         </div>
             
@@ -72,5 +76,9 @@
     .main-ui {
         background-color: rgba(255, 255, 255,.3);
     }
+
+    /* .text-area {
+        width: 200px;
+    } */
 
 </style>
